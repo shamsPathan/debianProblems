@@ -1,0 +1,18 @@
+sudo apt remove xserver-xorg-input-synaptics
+sudo apt install xserver-xorg-input-libinput
+
+sudo mkdir /etc/X11/xorg.conf.d
+sudo nano /etc/X11/xorg.conf.d/40-libinput.conf
+
+Section "InputClass"
+        Identifier "libinput touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "Tapping" "on"
+EndSection
+
+
+SAVE
+
+sudo systemctl restart lightdm
